@@ -2,7 +2,7 @@
 
 Et ikke-persistent browser-automatiseringsscript for [mh.audun.gg](https://mh.audun.gg), utviklet for å automatisere aktiviteter, overvåke politi og bruke fallback-handlinger når nødvendig.
 
-> ⚠️ Dette skriptet må **limes inn i konsollen** hver gang siden lastes på nytt — *eller installeres som et Tampermonkey-script!*
+> ⚠️ Dette skriptet må **limes inn i konsollen** hver gang siden lastes på nytt, med mindre du bruker Tampermonkey (se under).
 
 ---
 
@@ -14,30 +14,34 @@ Et ikke-persistent browser-automatiseringsscript for [mh.audun.gg](https://mh.au
 - GUI-panelet med status, kontroll og fallback-prioritet
 - Visualisering av gjenværende tid (sykluser → minutter/timer/dager)
 - Mulighet til å skanne tilgjengelige aktiviteter og lagre i `localStorage`
-- **Støtte for Tampermonkey – gjør scriptet persistent og automatisk**
 
 ---
 
-## 🧑‍💻 Bruk via Konsoll (manuelt)
+## 🧑‍💻 Bruk
 
 1. Åpne [mh.audun.gg](https://mh.audun.gg) i en Chromium-basert nettleser (f.eks. Chrome, Brave, Edge).
-2. Trykk `F12` eller høyreklikk → `Inspiser` → gå til "Console"-fanen.
-3. Lim inn hele scriptet og trykk `Enter`.
-4. Et kontrollpanel vises øverst til høyre (eller under menyen).
+2. **Installer via Tampermonkey:**
+   - Installer [Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - Eller [Tampermonkey for Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - Opprett nytt userscript og bruk følgende metadata:
 
----
+     ```js
+     // ==UserScript==
+     // @name         Mafiaens Hevn AutoScript
+     // @namespace    https://mh.audun.gg/
+     // @version      1.0
+     // @description  Automatisk aktivitet, politi-overvåkning og fallback i Mafiaens Hevn
+     // @author       Jarl Kristian Gipling
+     // @match        https://mh.audun.gg/*
+     // @grant        none
+     // @run-at       document-idle
+     // @require      https://raw.githubusercontent.com/gipling90/mh.audun.gg/main/mh-tampermonkey.js
+     // ==/UserScript==
+     ```
 
-## 🧩 Bruk via Tampermonkey (automatisk)
-
-1. Installer Tampermonkey:
-   - [Chrome Web Store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Gå til `https://mh.audun.gg`.
-3. Klikk på Tampermonkey-ikonet → `Opprett nytt script`.
-4. Lim inn hele Mafiaens Hevn AutoScript og lagre (`Ctrl+S`).
-5. Scriptet vil nå kjøre automatisk hver gang du åpner siden.
-
-> 💡 Alternativt kan du lenke scriptet til `@include` i metadata hvis du vil laste det fra et GitHub raw-URL.
+3. Alternativt: Trykk `F12` eller høyreklikk → `Inspiser` → gå til "Console"-fanen.
+4. Lim inn hele scriptet og trykk `Enter`.
+5. Et kontrollpanel vises øverst til høyre.
 
 ---
 
@@ -71,7 +75,7 @@ Et ikke-persistent browser-automatiseringsscript for [mh.audun.gg](https://mh.au
 - **Statusgjenkjenning:** Analyserer fremdriftsindikator og nedtelling
 - **Fallbacklogikk:** Går gjennom prioritert liste og forsøker start
 - **Persistent fallback/data:** Lokal lagring via `localStorage`
-- **GUI:** Generert via JS og festet til DOM-en under meny-panelet
+- **GUI:** Generert via JS og festet til DOM-en i høyre hjørne
 
 ---
 
