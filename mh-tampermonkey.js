@@ -297,7 +297,14 @@
 
 
         function tryFallbackActivities(index = 0) {
+  // 🔒 Ikke gjør noe hvis en aktivitet kjører (timer er synlig og blå)
+  const timer = findCountdownTimer();
+  if (timer) {
+    console.log("⏳ Aktivitet er allerede aktiv – hopper over fallback.");
+    return;
+  }
 
+  // 🛡️ Beskytt mot gjentatt fallbackforsøk
             if (!isTryingFallback) {
                 isTryingFallback = true;
                 setTimeout(() => isTryingFallback = false, 10000); // beskytt i 10 sekunder
